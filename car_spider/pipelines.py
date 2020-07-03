@@ -5,6 +5,7 @@
 
 from car_spider.items import DetailLinkItem
 from car_spider.items import DetailItem
+from car_spider.constant import SpiderConstant
 import json
 
 
@@ -12,16 +13,18 @@ import json
 class DetailLinkPipeline:
 
     def __init__(self):
-        self.fp_link = open("data/guazi/guazi_link.txt", "w", encoding='utf-8')
-        self.fp_detail = open("data/guazi/guazi_detail.txt", "w", encoding='utf-8')
+        self.fp_link = open(SpiderConstant.HREF_FILE, "w", encoding='utf-8')
+        self.fp_detail = open(SpiderConstant.TARGET_DIR+SpiderConstant.TARGET_FILENAME, "w", encoding='utf-8')
 
     def process_item(self, item, spider):
 
         content = json.dumps(dict(item), ensure_ascii=False)
         if isinstance(item, DetailLinkItem):
             self.fp_link.write(content + "\n")
+            self.fp_link.flush()
         if isinstance(item, DetailItem):
             self.fp_detail.write(content + "\n")
+            self.fp_detail.flush()
         return item
 
     def close_spider(self, spider):

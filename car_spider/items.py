@@ -30,6 +30,7 @@ class DetailItem(scrapy.Item):
     level = Field()         # 级别
     engine = Field()        # 发动机
     gearbox_d = Field()     # 变速箱详细信息
+    struction = Field()     # 车身结构
     LWH = Field()           # 长宽高
     wheelbase = Field()     # 轴距
     luggage = Field()       # 行李箱容积

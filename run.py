@@ -17,7 +17,5 @@ import threading
 execute('scrapy crawl guazi_info_link -s LOG_FILE=./log/guazi_info_link.log'.split())
 
 
-
-
 if __name__ == '__main__':
     pass

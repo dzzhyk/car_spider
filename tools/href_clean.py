@@ -6,7 +6,7 @@
 # @Software: PyCharm
 
 import json
-from car_spider.util import SpiderUtil
+from util import SpiderUtil
 
 
 # href数据清洗
@@ -55,11 +55,27 @@ def generate(domain_url, subhref, save_to):
     return cnt
 
 
+# 详情页href清洗
+def clean_detail(filename, save_to):
+    cnt = 0
+    with open(filename, "r", encoding='utf-8') as fin:
+        fout = open(save_to, "w", encoding='utf-8')
+        for line in fin.readlines():
+            fout.write(line.split('#')[0] + "\n")
+            cnt += 1
+        fout.close()
+        fin.close()
+    return cnt
+
+
 if __name__ == '__main__':
     # cnt = clean("../temp/guazi/guazi_car_code.txt", "../meta_data/guazi/guazi_model_href.json", "../temp/guazi/cleaned/guazi_subhref_cleaned.txt")
     # print("共计生成：" + str(cnt) + " 条临时subhref_cleaned记录")
 
-    cnt = generate("www.guazi.com",
-                   "../temp/guazi/cleaned/guazi_subhref_cleaned.txt",
-                   "../data/guazi/guazi_href.txt")
+    # cnt = generate("www.guazi.com",
+    #                "../temp/guazi/cleaned/guazi_subhref_cleaned.txt",
+    #                "../data/guazi/guazi_href.txt")
+
+    cnt = clean_detail("../temp/guazi/temp.txt", "../temp/guazi/cleaned/detail_links_cleaned.txt")
+
     print("共计生成：" + str(cnt) + " 条href")
